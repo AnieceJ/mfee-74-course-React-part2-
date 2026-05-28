@@ -12,6 +12,16 @@ export default function RenderPage() {
       這是字串
       {'這也是字串'}
       {`這也是${1 + 1}字串`}
+      <h2>布林值boolean</h2>
+      {/* 不會渲染呈現 */}
+      {true}
+      {false}
+      <h2>null/undefined</h2>
+      {/* 不會渲染呈現 */}
+      {null}
+      {undefined}
+      <h2>陣列array</h2>
+      <h2>物件object</h2>
     </>
   );
 }
