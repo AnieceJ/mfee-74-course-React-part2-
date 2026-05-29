@@ -29,7 +29,7 @@ export default function ProductTablePage() {
                 <td>{product.id}</td>
                 <td>
                   <Image
-                    src={product.image_url}
+                    src="/product/photo-1.webp"
                     width={100}
                     height={100}
                     alt={product.name}
