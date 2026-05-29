@@ -27,7 +27,14 @@ export default function ProductTablePage() {
             return (
               <tr key={product.id}>
                 <td>{product.id}</td>
-                <td>圖片</td>
+                <td>
+                  <Image
+                    src={product.image_url}
+                    width={100}
+                    height={100}
+                    alt={product.name}
+                  />
+                </td>
                 <td>{product.name}</td>
                 <td>{product.price}</td>
               </tr>
