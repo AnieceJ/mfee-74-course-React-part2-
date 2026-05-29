@@ -20,7 +20,18 @@ export default function ProductTablePage() {
             <th>價格</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {products.map((product) => {
+            return (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>圖片</td>
+                <td>{product.name}</td>
+                <td>{product.price}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </>
   );
