@@ -59,6 +59,7 @@ export default function TodoPage() {
             const newTodo = {
               id: crypto.randomUUID(), //新項目使用uuid當作id
               text: inputText,
+              completed: false,
             };
             // 狀態更動第1、2步。加到新狀態的最前面
             const nextTodos = [newTodo, ...todos];
