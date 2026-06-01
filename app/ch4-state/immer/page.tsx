@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, Profiler } from 'react';
+import { useState } from 'react';
+import { produce } from 'immer';
 
 export default function ImmerPage() {
   const [user, setUser] = useState({
@@ -51,8 +52,46 @@ export default function ImmerPage() {
       >
         city=新北市
       </button>
-
+      <hr />
       {/* 使用immer */}
+      <button
+        onClick={() => {
+          // 1,2 在immer的produce中的第二個參數函式中作更動
+          const nextUser = produce(user, (draftState) => {
+            // 可將draftState視為深拷貝得到的複本(實際為代理樣式)
+            draftState.name = '李四';
+          });
+          setUser(nextUser);
+        }}
+      >
+        name=李四
+      </button>
+      <button
+        onClick={() => {
+          // 1,2 在immer的produce中的第二個參數函式中作更動
+          const nextUser = produce(user, (draftState) => {
+            // 可將draftState視為深拷貝得到的複本(實際為代理樣式)
+            draftState.profile.phone = '0988123456';
+          });
+          // 3. 呼叫set方法設定到狀態
+          setUser(nextUser);
+        }}
+      >
+        phone=0988123456
+      </button>
+      <button
+        onClick={() => {
+          // 1,2 在immer的produce中的第二個參數函式中作更動
+          const nextUser = produce(user, (draftState) => {
+            // 可將draftState視為深拷貝得到的複本(實際為代理樣式)
+            draftState.profile.address.city = '新北市';
+          });
+          // 3. 呼叫set方法設定到狀態
+          setUser(nextUser);
+        }}
+      >
+        city=新北市
+      </button>
     </>
   );
 }
