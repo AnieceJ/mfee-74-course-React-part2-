@@ -6,6 +6,8 @@ import { Todo } from './_types/todo';
 // 導入子元件
 import AddForm from './_components/add-form';
 
+import List from './_components/list';
+
 // 範例資料(mock)
 const initData = [
   {
@@ -55,32 +57,12 @@ export default function TodoPage() {
       <hr />
       {/* 新增待辨事項的表單 */}
       <AddForm onAdd={onAdd} />
-      <ul>
-        {todos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <input
-                type="checkbox"
-                // 核取方塊是用checked布林值代表是否有被選中
-                checked={todo.completed}
-                onChange={() => {
-                  onToggleCompleted(todo.id);
-                }}
-              />
-              {todo.text}
-              <button
-                onClick={() => {
-                  if (confirm('你確定要刪除這個項目？')) {
-                    onRemove(todo.id);
-                  }
-                }}
-              >
-                x
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      {/* 列表 */}
+      <List
+        todos={todos}
+        onRemove={onRemove}
+        onToggleCompleted={onToggleCompleted}
+      />
     </>
   );
 }
