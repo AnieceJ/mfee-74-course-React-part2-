@@ -3,6 +3,8 @@
 import { useState } from 'react';
 // 導入類型(型別)
 import { Todo } from './_types/todo';
+// 導入子元件
+import AddForm from './_components/add-form';
 
 // 範例資料(mock)
 const initData = [
@@ -17,8 +19,6 @@ const initData = [
 export default function TodoPage() {
   // 記錄待辨事項的狀態
   const [todos, setTodos] = useState<Todo[]>(initData);
-  // 宣告給文字輸入框使用的狀態
-  const [inputText, setInputText] = useState('');
 
   // 處理新增
   const onAdd = (todo: Todo) => {
@@ -53,32 +53,8 @@ export default function TodoPage() {
     <>
       <h1>待辨事項</h1>
       <hr />
-      <input
-        type="text"
-        // 狀態是什麼 -> 文字輸入框呈現什麼
-        value={inputText}
-        // 在文字輸入框輸入了什麼 -> 狀態更動成什麼
-        onChange={(e) => {
-          setInputText(e.target.value);
-        }}
-        // 按下enter鍵要觸發加入到todos
-        onKeyDown={(e) => {
-          // 按下enter鍵而且有輸入文字的情況下
-          if (e.key === 'Enter' && inputText.trim()) {
-            // 建立新的todo
-            const newTodo: Todo = {
-              id: crypto.randomUUID(), //新項目使用uuid當作id
-              text: inputText,
-              completed: false,
-            };
-
-            onAdd(newTodo);
-
-            // 清空文字輸入框
-            setInputText('');
-          }
-        }}
-      />
+      {/* 新增待辨事項的表單 */}
+      <AddForm onAdd={onAdd} />
       <ul>
         {todos.map((todo) => {
           return (
