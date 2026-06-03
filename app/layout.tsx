@@ -20,7 +20,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {/* 第3-2步: 最外層元件包裹Provider元件，提供Context給其下的後代元件 */}
         <ThemeProvider>
-          <ThemeSwitch />
+          {/* 先註解掉，要測試theme可以開啟 */}
+          {/* <ThemeSwitch /> */}
           {children}
         </ThemeProvider>
       </body>
