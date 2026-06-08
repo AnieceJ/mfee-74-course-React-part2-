@@ -6,6 +6,8 @@ import { ThemeProvider } from '@/context/theme';
 import ThemeSwitch from './_components/theme-switch';
 // 購物車context provider
 import { CartProvider } from '@/context/cart';
+// 會員context provider
+import { UserProvider } from '@/context/user';
 
 export const metadata: Metadata = {
   title: 'React課堂範例',
@@ -24,7 +26,9 @@ export default function RootLayout({
         <ThemeProvider>
           {/* 先註解掉，要測試theme可以開啟 */}
           {/* <ThemeSwitch /> */}
-          <CartProvider>{children}</CartProvider>
+          <UserProvider>
+            <CartProvider>{children}</CartProvider>
+          </UserProvider>
         </ThemeProvider>
       </body>
     </html>

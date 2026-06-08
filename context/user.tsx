@@ -3,7 +3,19 @@
 
 import { createContext, useState, useContext } from 'react';
 
-interface UserContextType {}
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface UserContextType {
+  user: User | null;
+  login: (email: string, password: string) => void;
+  logout: () => void;
+  isLoggedIn: boolean;
+}
 
 // 使用 null 作為預設值，這是 React Context 的常見做法
 const UserContext = createContext<UserContextType | null>(null);
@@ -12,7 +24,42 @@ UserContext.displayName = 'UserContext';
 
 // 第3-1步，建立Provider元件
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
+  // 初始會員物件(預設會員物件)
+  const initUser = { id: 0, name: '', email: '', password: '' };
+  // 定義會員狀態
+  const [user, setUser] = useState<User>(initUser);
+  // 判斷會員是否登入
+  const isLoggedIn = Boolean(user.id);
+
+  // 登入
+  const login = (email: string, password: string): void => {
+    if (email === 'abc@aa.com' && password === '12345') {
+      setUser({
+        id: 1,
+        name: 'Jane Doe',
+        email: 'abc@aa.com',
+        password: '12345',
+      });
+    }
+  };
+
+  // 登出
+  const logout = () => {
+    setUser(initUser);
+  };
+
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        isLoggedIn,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 }
 
 // 自訂名稱鉤子(先包裝useContext+UserContext)
