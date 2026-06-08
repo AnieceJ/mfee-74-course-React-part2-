@@ -3,14 +3,16 @@
 import MyInput from './_components/my-input';
 import MyTextarea from './_components/my-textarea';
 import MySelect from './_components/my-select';
+import MyRadioButtons from './_components/my-radio-buttons';
 
 export default function ControlledPage() {
   return (
     <>
       <h1>可控表單元件範例(controlled)</h1>
       <hr />
-      <MySelect />
-      <MyTextarea />
+      <MyRadioButtons />
+      {/* <MySelect /> */}
+      {/* <MyTextarea /> */}
       {/* <MyInput /> */}
     </>
   );
