@@ -12,8 +12,8 @@ interface User {
 
 interface UserContextType {
   user: User | null;
-  login: (email: string, password: string) => void;
-  logout: () => void;
+  login: (email: string, password: string) => string;
+  logout: () => string;
   isLoggedIn: boolean;
 }
 
@@ -32,7 +32,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const isLoggedIn = Boolean(user.id);
 
   // 登入
-  const login = (email: string, password: string): void => {
+  const login = (email: string, password: string): string => {
     if (email === 'abc@aa.com' && password === '12345') {
       setUser({
         id: 1,
@@ -40,16 +40,16 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         email: 'abc@aa.com',
         password: '12345',
       });
-      alert('歡迎，你已登入');
+      return 'success';
     } else {
-      // TODO: 這裡應該不要處理ui
-      alert('email或密碼錯誤!');
+      return 'fail';
     }
   };
 
   // 登出
-  const logout = () => {
+  const logout = (): string => {
     setUser(initUser);
+    return 'success';
   };
 
   return (
