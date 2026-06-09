@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 // 導入next提供的有自動圖片最佳化的元件
 import Image from 'next/image';
+import Link from 'next/link';
 // 導入css樣式
 import './_styles/product-table.css';
 
@@ -20,7 +21,7 @@ interface Product {
 
 // 資料來源:
 const url =
-  'https://my-json-server.typicode.com/eyesofkids/json-fake-data/products';
+  'https://my-json-server.typicode.com/eyesofkids/json-fake-data/products/';
 
 export default function ProductTablePage() {
   // 需要定義狀態，因為觸發更新階段(狀態需要更動才行)
@@ -40,6 +41,8 @@ export default function ProductTablePage() {
 
   return (
     <>
+      <h1>商品列表</h1>
+      <hr />
       <table>
         <thead>
           <tr>
@@ -47,6 +50,7 @@ export default function ProductTablePage() {
             <th>圖片</th>
             <th>名稱</th>
             <th>價格</th>
+            <th> </th>
           </tr>
         </thead>
         <tbody>
@@ -62,10 +66,14 @@ export default function ProductTablePage() {
                     width={100}
                     height={100}
                     alt={product.name}
+                    loading="lazy"
                   />
                 </td>
                 <td>{product.name}</td>
                 <td>{product.price}</td>
+                <td>
+                  <Link href={`./product-v2/${product.id}`}>詳情</Link>
+                </td>
               </tr>
             );
           })}
