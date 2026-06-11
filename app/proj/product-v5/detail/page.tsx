@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 // 載入動畫
 import CssLoader from '../_components/css-loader';
-// 導入專門在網頁一開始就作fetch樣式的鉤子
-import { useFetch } from '@/hooks/use-fetch';
+import useSWR from 'swr';
+// 客製化swr要用的獲取函式
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 interface Product {
   id: number;
@@ -29,10 +30,10 @@ export default function ProductPage() {
   const sp = useSearchParams();
   const id = sp.get('id');
   // 重複利用useFetch寫好的商業邏輯
-  const { data, loading } = useFetch<Product | null>(url + id, null);
+  const { data, isLoading } = useSWR(url + id, fetcher);
   const product = data;
 
-  if (loading) {
+  if (isLoading) {
     return (
       <>
         <CssLoader />

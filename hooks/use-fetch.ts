@@ -13,7 +13,7 @@ export function useFetch<T>(
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, option);
         const resData = await res.json();
         setData(resData);
       } catch (err) {
@@ -26,7 +26,7 @@ export function useFetch<T>(
     };
     // 呼叫函式
     getData();
-  }, [url, loaderMs]);
+  }, [url, loaderMs, option]);
 
   return { data, loading, error };
 }
