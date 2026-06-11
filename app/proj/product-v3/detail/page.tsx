@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import CssLoader from '../_components/css-loader';
 
 interface Product {
   id: number;
@@ -27,6 +28,8 @@ export default function ProductPage() {
   const id = sp.get('id');
   // 需要定義狀態，因為觸發更新階段(狀態需要更動才行)
   const [product, setProduct] = useState<Product | null>(null);
+  //
+  const [isLoading, setIsLoading] = useState(true);
 
   // 元件第一次`渲染``之後`執行一次
   useEffect(() => {
@@ -35,10 +38,22 @@ export default function ProductPage() {
       const res = await fetch(url + id);
       const resData = await res.json();
       setProduct(resData);
+      // 關閉載入指示動畫，控制一段時間才關閉
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
     };
     // 呼叫函式
     getProduct();
   }, [id]);
+
+  if (isLoading) {
+    return (
+      <>
+        <CssLoader />
+      </>
+    );
+  }
 
   return (
     <>
