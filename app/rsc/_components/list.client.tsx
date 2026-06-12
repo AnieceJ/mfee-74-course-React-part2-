@@ -1,16 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
-
-interface ListClientProps {
-  posts: Post[];
-}
+import { ListClientProps } from '../_types';
 
 export default function ListClient({ posts }: ListClientProps) {
   return (

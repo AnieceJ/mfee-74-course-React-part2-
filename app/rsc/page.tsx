@@ -2,12 +2,8 @@ import db from '@/lib/db';
 
 // 導入客戶端元件
 import ListClient from './_components/list.client';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
+// 導入類型
+import { Post } from './_types';
 
 export default async function RscPage() {
   // 執行sql

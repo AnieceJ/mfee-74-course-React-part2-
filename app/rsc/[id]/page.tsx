@@ -1,19 +1,6 @@
 import db from '@/lib/db';
 import Link from 'next/link';
-
-interface PageParams {
-  id: string;
-}
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
-
-interface PostDetailPageProps {
-  params: Promise<PageParams>;
-}
+import { PostDetailPageProps, Post } from '../_types';
 
 export default async function PostDetailPage({ params }: PostDetailPageProps) {
   // 從動態路由參數中得到id(以資料夾命名為準`[id]`)
