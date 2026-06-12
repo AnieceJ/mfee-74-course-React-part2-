@@ -2,9 +2,9 @@ import mysql from 'mysql2/promise';
 
 // 資料庫連線設定
 const dbConfig = {
-  host: 'localhost',
-  user: 'next_0612',
-  password: '12345',
+  host: '127.0.0.1',
+  user: 'root',
+  password: 'P@ssw0rd',
   database: 'next_0612',
   port: 3306,
   waitForConnections: true,
